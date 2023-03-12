@@ -8,14 +8,18 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.thymeleaf.Thymeleaf;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 import org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver;
+import org.thymeleaf.spring6.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 
 @Configuration
 @EnableWebMvc
 @ComponentScan("com.javarush")
 public class WebConfig implements WebMvcConfigurer {
+    // Настройка отображения
+
     private final ApplicationContext applicationContext;
 
     public WebConfig(ApplicationContext applicationContext) {
@@ -39,6 +43,13 @@ public class WebConfig implements WebMvcConfigurer {
          engine.setTemplateResolver(templateResolver());
          engine.setEnableSpringELCompiler(true);
          return engine;
+    }
+
+    @Bean
+    public ThymeleafViewResolver viewResolver(){
+        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+        viewResolver.setTemplateEngine(engine());
+        return viewResolver;
     }
 
     @Override

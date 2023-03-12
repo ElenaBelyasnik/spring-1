@@ -39,7 +39,7 @@ public class TaskService {
         return task;
     }
 
-    public Task create(int id, String description, Status status){
+    public Task create(String description, Status status){
         Task task = new Task();
         task.setDescription(description);
         task.setStatus(status);
